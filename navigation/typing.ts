@@ -39,7 +39,7 @@ export enum HomeRoute{
 
 export type HomeParamLists ={
 Home:undefined
-Food:undefined
+Food:{name:undefined}
 }
 
 

@@ -1,4 +1,4 @@
-import { View, Text, FlatList } from 'react-native'
+import { View, Text, FlatList, ActivityIndicator } from 'react-native'
 import React from 'react';
 import PopularItem from './PopularItem';
 import { useNavigation } from '@react-navigation/native';
@@ -23,6 +23,10 @@ const MenuList:React.FC<MenuListProps> = ({menu}) => {
       })}}/>
     }
   return (
+
+    <>
+    {
+      menu? 
    <FlatList
     data={menu}
     renderItem={renderItem}
@@ -30,6 +34,9 @@ const MenuList:React.FC<MenuListProps> = ({menu}) => {
     horizontal={true} 
     showsHorizontalScrollIndicator={false}
    />
+   :<ActivityIndicator size={'large'} color='green'/>
+  }
+   </>
   )
 }
 

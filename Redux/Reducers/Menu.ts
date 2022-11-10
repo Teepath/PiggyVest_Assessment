@@ -20,7 +20,7 @@ const initialState ={
 
 
 const MenuList = (state=initialState, action:MenuActionProps)=>{
-    switch(action.type){
+    switch(action?.type){
          
         case GET_MENU_LIST:
             return{

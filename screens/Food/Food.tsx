@@ -1,8 +1,9 @@
-import { View, Text, StyleSheet, Image, Dimensions, TouchableOpacity } from 'react-native'
-import React from 'react';
+import { View, Text, StyleSheet, Image, Dimensions, TouchableOpacity, KeyboardAvoidingViewBase } from 'react-native'
+import React,{useState} from 'react';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import Icon from "react-native-vector-icons/Entypo";
 import FoodItem from './Items/FoodItem';
+import styled from 'styled-components/native';
 import Spacing from '../../components/Spacing';
 import { NativeStackNavigationProp, NativeStackScreenProps} from '@react-navigation/native-stack';
 import type { RouteProp } from '@react-navigation/native'
@@ -13,12 +14,25 @@ import { HomeParamLists } from '../../navigation/typing';
 import { useSelector } from 'react-redux';
 import { SelectedProps } from '../Redux/Reducers/SelectFood';
 
+
+
 const {width, height} = Dimensions.get('window')
+
+
+const Button =styled.TouchableOpacity`
+width:20px;
+height:20px;
+border-radius:4;
+border: 1px solid grey;
+align-items:center;
+justify-content:center;
+`;
 type Props ={
 route:NativeStackScreenProps<HomeParamLists, "Food">
 }
 const Food = ({route}:Props) => {
     const item =route?.params;
+    const [count, setCount] = useState<number>(1)
     const foodSelected:any = useSelector((state:SelectedProps)=>state.selected.item)
 
     console.log(item, 'single')
@@ -50,9 +64,9 @@ const Food = ({route}:Props) => {
 <View style={{flexDirection:'row', justifyContent:'space-between', alignItems:'center', marginTop:10}}>
     <View style={{width:250}}><Text style={{color:'black', fontWeight:'800'}}>Total: $12.99</Text></View>
     <View style={styles.count}>
-        <TouchableOpacity style={styles.btn}><Text>-</Text></TouchableOpacity></View>
+        <TouchableOpacity style={styles.btn} onPress={()=>setCount(()=> count - 1)}><Text>-</Text></TouchableOpacity></View>
         <Text style={{color:'black', fontWeight:'600', fontSize:16}}>1</Text>
-        <TouchableOpacity style={styles.btn}><Text style={{}}>+</Text></TouchableOpacity>
+        <Button style={styles.btn} onPress={()=>setCount(()=> count + 1)}><Text style={{}}>+</Text></Button>
 </View>
 <Spacing direction='vertical' size={MARGIN_SIZES.small}/>
 <TouchableOpacity style={styles.submit} onPress={()=>console.log('press')}><Text>Next</Text></TouchableOpacity>
@@ -73,7 +87,7 @@ const styles = StyleSheet.create({
     },
     imageCard:{
         position:'absolute',
-        top:100,
+        top:50,
         bottom:0,
         left:120,
         right:0,
@@ -82,7 +96,7 @@ const styles = StyleSheet.create({
 
     bottomCard:{
         position:'absolute',
-        top:180,
+        top:140,
         padding:10,
         minHeight:800,
         height:'auto',

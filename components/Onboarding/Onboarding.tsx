@@ -49,10 +49,9 @@ const OnBoarding = () => {
     
   const dotColor =theme.palette.tertiary.grey;
   const navigationColor = theme.palette.primary.blue;
-  
 
 
-
+ 
 
 const saveGuest =async()=>{
   await AsyncStorage.setItem('@viewOnboarding', 'true')
@@ -77,13 +76,27 @@ const setup = async () => {
 };
 
 
+
+
+
+
+
+
+
 React.useEffect(() => {
   setup()
 },[]);
 
+
+
+
+
+
+
 if(showOnBoarding){
   navigation.navigate("HomeTab", {screen:'Home'})
 }
+
 
   return (
     <SafeAreaView>
@@ -213,3 +226,9 @@ const styles = StyleSheet.create({
 })
 
 export default OnBoarding;
+
+
+
+
+
+

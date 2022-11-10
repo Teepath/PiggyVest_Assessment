@@ -1,4 +1,4 @@
-import { View, Text, FlatList, StyleSheet} from 'react-native'
+import { View, Text, FlatList, StyleSheet, ActivityIndicator} from 'react-native'
 import React from 'react'
 import FoodTag from './foodTag'
 import {foodListProps, foodProps, listProps} from '../Redux/type'
@@ -22,6 +22,9 @@ const FoodList:React.FC<Props> = ({items, bgColor, onPress}) => {
         </View>
       }
   return (
+    <>
+    {
+      items?  
     <FlatList
       data={items}
       renderItem={renderItem} 
@@ -32,6 +35,10 @@ const FoodList:React.FC<Props> = ({items, bgColor, onPress}) => {
      keyExtractor={({item}:any)=> item?.idCategory?.toString()}
      ItemSeparatorComponent={SeparatorComponent}
       />
+
+      :<ActivityIndicator  size={'large'}/>
+    }
+      </>
   )
 }
 
